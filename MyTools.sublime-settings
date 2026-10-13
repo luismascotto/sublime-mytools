@@ -1,0 +1,10 @@
+{
+	// Executable name (resolved via PATH) or full path.
+	// "pwsh.exe" = PowerShell 7, "powershell.exe" = Windows PowerShell 5.1.
+	"powershell_executable": "pwsh.exe",
+
+	// Where to open the new PowerShell instance:
+	// "windows_terminal" = new Windows Terminal window (falls back to "console" if wt.exe is not found)
+	// "console"          = classic console window
+	"terminal": "windows_terminal",
+}

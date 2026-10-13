@@ -1,0 +1,45 @@
+[
+	{
+		"id": "tools",
+		"children": [
+			{
+				"caption": "MyTools",
+				"id": "mytools",
+				"children": [
+					{ "caption": "Send to PowerShell", "command": "mytools_send_to_powershell" },
+				],
+			},
+		],
+	},
+	{
+		"id": "preferences",
+		"children": [
+			{
+				"id": "package-settings",
+				"children": [
+					{
+						"caption": "MyTools",
+						"children": [
+							{
+								"caption": "Settings",
+								"command": "edit_settings",
+								"args": {
+									"base_file": "${packages}/MyTools/MyTools.sublime-settings",
+									"default": "{\n\t$0\n}\n",
+								},
+							},
+							{
+								"caption": "Key Bindings",
+								"command": "edit_settings",
+								"args": {
+									"base_file": "${packages}/MyTools/Default ($platform).sublime-keymap",
+									"default": "[\n\t$0\n]\n",
+								},
+							},
+						],
+					},
+				],
+			},
+		],
+	},
+]

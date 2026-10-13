@@ -1,0 +1,4 @@
+[
+	{ "caption": "-", "id": "mytools" },
+	{ "caption": "Send to PowerShell", "command": "mytools_send_to_powershell" },
+]

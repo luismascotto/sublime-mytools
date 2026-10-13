@@ -1,0 +1,19 @@
+[
+	{ "caption": "MyTools: Send to PowerShell", "command": "mytools_send_to_powershell" },
+	{
+		"caption": "Preferences: MyTools Settings",
+		"command": "edit_settings",
+		"args": {
+			"base_file": "${packages}/MyTools/MyTools.sublime-settings",
+			"default": "{\n\t$0\n}\n",
+		},
+	},
+	{
+		"caption": "Preferences: MyTools Key Bindings",
+		"command": "edit_settings",
+		"args": {
+			"base_file": "${packages}/MyTools/Default ($platform).sublime-keymap",
+			"default": "[\n\t$0\n]\n",
+		},
+	},
+]

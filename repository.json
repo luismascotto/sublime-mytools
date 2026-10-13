@@ -1,0 +1,12 @@
+{
+	"schema_version": "3.0.0",
+	"packages": [
+		{
+			"name": "MyTools",
+			"details": "https://github.com/luismascotto/sublime-mytools",
+			"releases": [
+				{ "sublime_text": ">=4000", "platforms": ["windows"], "tags": true }
+			]
+		}
+	]
+}
