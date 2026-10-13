@@ -38,6 +38,12 @@ class BootstrapScriptTests(unittest.TestCase):
         self.assertIn("PowerShell.OnIdle -MaxTriggerCount 1", script)
         self.assertIn("[Microsoft.PowerShell.PSConsoleReadLine]::Insert", script)
 
+    def test_passes_text_via_global_variable_not_event_message_data(self):
+        script = powershell.build_bootstrap_script("x")
+        self.assertIn("Insert([string]$global:MyToolsSendText)", script)
+        self.assertIn("Remove-Variable -Name MyToolsSendText -Scope Global", script)
+        self.assertNotIn("$Event.MessageData", script)
+
 
 class EncodeCommandTests(unittest.TestCase):
     def test_round_trips_as_utf16le_base64(self):

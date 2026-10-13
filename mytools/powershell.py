@@ -32,6 +32,9 @@ def quote_ps_literal(value: str) -> str:
 def build_bootstrap_script(text_path: str) -> str:
     # Runs in a child scope so nothing leaks into the interactive session.
     # PSReadLine must be idle at the prompt for Insert() to work, hence OnIdle.
+    # $Event.MessageData is $null for OnIdle (PSReadLine raises it without data),
+    # so the text goes through a one-shot global variable. The [string] cast keeps
+    # Insert() off its char overload, which would insert NUL for $null.
     return (
         "& {\n"
         "    $path = " + quote_ps_literal(text_path) + "\n"
@@ -39,9 +42,11 @@ def build_bootstrap_script(text_path: str) -> str:
         "    Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue\n"
         "    try {\n"
         "        Import-Module PSReadLine -ErrorAction Stop\n"
+        "        $global:MyToolsSendText = $text\n"
         "        $null = Register-EngineEvent -SourceIdentifier PowerShell.OnIdle"
-        " -MaxTriggerCount 1 -MessageData $text -Action {\n"
-        "            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($Event.MessageData)\n"
+        " -MaxTriggerCount 1 -Action {\n"
+        "            [Microsoft.PowerShell.PSConsoleReadLine]::Insert([string]$global:MyToolsSendText)\n"
+        "            Remove-Variable -Name MyToolsSendText -Scope Global -ErrorAction SilentlyContinue\n"
         "        }\n"
         "    } catch {\n"
         "        Set-Clipboard -Value $text\n"
